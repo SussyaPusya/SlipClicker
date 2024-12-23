@@ -1,6 +1,6 @@
 package main
 
-import "github.com/SussyaPusya/SlipClicker/SlipClicker/internal/app"
+import "github.com/SussyaPusya/SlipClicker/internal/app"
 
 func main() {
 	server := app.New()
