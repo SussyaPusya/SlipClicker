@@ -1,6 +1,12 @@
 package app
 
-import "os"
+import (
+	"fmt"
+	"os"
+
+	"github.com/SussyaPusya/SlipClicker/SlipClicker/pkg/handlers"
+	"github.com/gin-gonic/gin"
+)
 
 type Config struct {
 	Path string
@@ -27,6 +33,24 @@ func New() *App {
 	}
 }
 
-func (a *App) Run() error {
-	//логика сервера
+func (a *App) Run() {
+	router := gin.Default()
+
+
+	router.Static("/assets", "./assets")
+	router.StaticFile("/assets", "./assets")
+
+	router.GET("/ping", handlers.Pong)
+
+
+	ro
+
+	
+
+	err := router.Run(":" + a.config.Path)
+	if err != nil {
+		fmt.Println(err)
+
+	}
+
 }
