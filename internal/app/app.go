@@ -1,7 +1,6 @@
 package app
 
 import (
-	"log/slog"
 	"os"
 
 	"github.com/SussyaPusya/SlipClicker/pkg/handlers"
@@ -34,19 +33,19 @@ func New() *App {
 }
 
 func (a *App) Run() {
-	gin.SetMode(gin.ReleaseMode)
+
 	router := gin.Default()
-	logger := slog.Default()
+
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
 
 	router.Static("/assets", "./pkg/assets")
 	router.StaticFile("/assets", "./pkg/assets")
 
 	router.GET("/ping", handlers.Pong)
 
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.File("pkg/html/index.html")
+	router.GET("/", handlers.ClickerHandler)
 
-	})
-	router.Use(handlers.LoggingMiddleware(logger))
+	router.Run()
 
 }
